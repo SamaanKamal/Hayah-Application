@@ -44,7 +44,7 @@ dependencies:
   flutter_login: ^4.1.1
   flutter_launcher_icons: ^0.11.0
   font_awesome_flutter: ^10.0.0
-  animated_splash_screen: ^1.3.0
+  easy_splash_screen: ^1.0.4
   cached_network_image: 
   animated_bottom_navigation_bar: ^1.1.0+1
 

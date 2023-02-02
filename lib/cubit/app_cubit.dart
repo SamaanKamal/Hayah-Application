@@ -53,7 +53,7 @@ class MyCubit extends Cubit<AppStates> {
     FontAwesomeIcons.circleQuestion,
   ];
   int activeIndex = 0;
-  int notActiveIndex = 0;
+  int notActiveIndex = 1;
   changeIndex(int x) {
     if (x == 4)
       notActiveIndex = 1;

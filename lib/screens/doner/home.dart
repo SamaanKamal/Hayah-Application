@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               title: Text('Exit'),
               leading: Icon(Icons.exit_to_app),
-              onTap: () => () {
+              onTap: () {
                 CacheHelper.saveData(key: isLogged, value: false);
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -123,6 +123,7 @@ class HomeScreen extends StatelessWidget {
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.softEdge,
           onTap: MyCubit.get(context).changeIndex,
+          inactiveColor: Colors.black,
           activeColor: MyCubit.get(context).notActiveIndex == 0
               ? Colors.red
               : Colors.black,
