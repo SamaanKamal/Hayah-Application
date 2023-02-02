@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,4 +66,30 @@ class MyCubit extends Cubit<AppStates> {
     ;
     emit(changeIndexState());
   }
+
+  CarouselController buttonCarouselController = CarouselController();
+  List<Widget> items = [
+    ClipRRect(
+        child: Image.asset("assets/images/11.png", fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(25)),
+    ClipRRect(
+        child: Image.asset("assets/images/22.jpg", fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(25)),
+    ClipRRect(
+        child: Image.asset("assets/images/7.jpg", fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(25)),
+  ];
+  int index = 0;
+  changedIndex(int x, CarouselPageChangedReason d) {
+    index = x;
+    emit(changedIndexCarouselState());
+  }
+
+  List<String> discountsImages = [
+    "assets/images/d1.jpg",
+    "assets/images/d2.jpg"
+  ];
+
+
+  
 }

@@ -29,8 +29,12 @@ class HomeScreen extends StatelessWidget {
         drawer: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Sohila Elsaid'),
-              accountEmail: Text('Sohila@gmail.com'),
+              accountName: Text(
+                'Sohila Elsaid',
+                style: TextStyle(color: Colors.black),
+              ),
+              accountEmail: Text('Sohila@gmail.com',
+                  style: TextStyle(color: Colors.black)),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
                   child: CachedNetworkImage(
@@ -43,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.red,
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage('assets/images/5.jpg')),
