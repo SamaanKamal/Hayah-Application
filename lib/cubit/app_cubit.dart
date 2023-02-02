@@ -66,14 +66,13 @@ class MyCubit extends Cubit<AppStates> {
     ;
     emit(changeIndexState());
   }
-
   CarouselController buttonCarouselController = CarouselController();
   List<Widget> items = [
     ClipRRect(
-        child: Image.asset("assets/images/11.png", fit: BoxFit.cover),
+        child: Image.asset("assets/images/22.jpg", fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(25)),
     ClipRRect(
-        child: Image.asset("assets/images/22.jpg", fit: BoxFit.cover),
+        child: Image.asset("assets/images/11.png", fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(25)),
     ClipRRect(
         child: Image.asset("assets/images/7.jpg", fit: BoxFit.cover),
@@ -91,5 +90,5 @@ class MyCubit extends Cubit<AppStates> {
   ];
 
 
-  
+
 }

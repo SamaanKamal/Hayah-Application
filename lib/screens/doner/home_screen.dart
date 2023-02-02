@@ -21,6 +21,7 @@ class HomeSecondScreen extends StatelessWidget {
               Column(children: <Widget>[
                 SizedBox(height: 10),
                 CarouselSlider(
+                
                   items: MyCubit.get(context).items,
                   carouselController:
                       MyCubit.get(context).buttonCarouselController,
@@ -30,7 +31,7 @@ class HomeSecondScreen extends StatelessWidget {
                     enlargeCenterPage: true,
                     viewportFraction: 0.9,
                     aspectRatio: 2.0,
-                    initialPage: 2,
+                    initialPage: 0,
                   ),
                 ),
                 SizedBox(height: 5),
