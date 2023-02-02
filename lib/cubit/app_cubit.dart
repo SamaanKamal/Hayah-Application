@@ -9,18 +9,26 @@ import 'package:hayah/screens/doner/centers.dart';
 import 'package:hayah/screens/doner/discounts.dart';
 import 'package:hayah/screens/doner/faq_screen.dart';
 import 'package:hayah/screens/doner/home.dart';
+import 'package:hayah/shared/components/noti.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../screens/doner/home_screen.dart';
+import '../shared/constants.dart';
 import 'app_states.dart';
 
 class MyCubit extends Cubit<AppStates> {
   MyCubit() : super(initialAppStates());
   static MyCubit get(context) => BlocProvider.of(context);
-  bool isLight = true;
+  bool isLightCubit = true;
+  bool pushNoti = true;
+  changePush() {
+    pushNoti = !pushNoti;
+    emit(SaveModeState());
+  }
+
   changeMode() {
-    this.isLight = CacheHelper.getData(key: isLight) ?? true;
+    this.isLightCubit = CacheHelper.getData(key: isLight) ?? true;
     emit(SaveModeState());
   }
 
@@ -66,6 +74,7 @@ class MyCubit extends Cubit<AppStates> {
     ;
     emit(changeIndexState());
   }
+
   CarouselController buttonCarouselController = CarouselController();
   List<Widget> items = [
     ClipRRect(
@@ -89,6 +98,8 @@ class MyCubit extends Cubit<AppStates> {
     "assets/images/d2.jpg"
   ];
 
-
-
+  List<NotificationCard> notis = [
+    NotificationCard("Welcome to our app!", "12:00 AM"),
+    NotificationCard("You are in top 10 donors this week!", "02:00 PM"),
+  ];
 }

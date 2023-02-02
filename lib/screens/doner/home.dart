@@ -7,12 +7,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
 import 'package:hayah/screens/login_screen.dart';
+import 'package:hayah/screens/my_account_screen.dart';
+import 'package:hayah/screens/notification_screen.dart';
+import 'package:hayah/screens/settings.dart';
 import 'package:hayah/shared/constants.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyCubit, AppStates>(
@@ -55,7 +57,10 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.person),
               title: Text('My account'),
-              onTap: () => null,
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditProfilePage()));
+              },
             ),
             Divider(
                 height: 1,
@@ -66,7 +71,12 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.notifications),
               title: Text('Notification'),
-              onTap: () => null,
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationScreen()));
+              },
             ),
             Divider(
                 height: 1,
@@ -77,7 +87,10 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
-              onTap: () => null,
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (Context) => SettingScreen()));
+              },
             ),
             Divider(
                 height: 1,
