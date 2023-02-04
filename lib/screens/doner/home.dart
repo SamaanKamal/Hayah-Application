@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +14,7 @@ import 'package:hayah/screens/notification_screen.dart';
 import 'package:hayah/screens/settings.dart';
 import 'package:hayah/shared/constants.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
+import 'package:gender_picker/gender_picker.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,20 +35,31 @@ class HomeScreen extends StatelessWidget {
           child: ListView(padding: EdgeInsets.zero, children: [
             UserAccountsDrawerHeader(
               accountName: Text(
-                'Sohila Elsaid',
+                CacheHelper.getData(key: "user") == null
+                    ? 'Sohila Elsaid'
+                    : jsonDecode(CacheHelper.getData(key: "user"))["name"]
+                        .toString(),
                 style: TextStyle(color: Colors.black),
               ),
-              accountEmail: Text('Sohila@gmail.com',
+              accountEmail: Text(
+                  CacheHelper.getData(key: "user") == null
+                      ? 'Sohila@gmail.com'
+                      : jsonDecode(CacheHelper.getData(key: "user"))["email"]
+                          .toString(),
                   style: TextStyle(color: Colors.black)),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    width: 90,
-                    height: 90,
-                    imageUrl:
-                        'https://oflutter.com/wp-content/uploads/2021/02/girl-profile.png',
-                  ),
+                  child: CacheHelper.getData(key: "user") == null
+                      ? Image.asset("assets/images/female.png",
+                          package: 'gender_picker')
+                      : jsonDecode(CacheHelper.getData(key: "user"))["gender"]
+                                  .toString()
+                                  .toLowerCase() ==
+                              'true'
+                          ? Image.asset("assets/images/male.png",
+                              package: 'gender_picker')
+                          : Image.asset("assets/images/female.png",
+                              package: 'gender_picker'),
                 ),
               ),
               decoration: BoxDecoration(

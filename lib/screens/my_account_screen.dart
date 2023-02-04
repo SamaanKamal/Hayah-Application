@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,15 +53,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 : FontAwesomeIcons.sun,
                           ),
                           onPressed: () {
+                            MyCubit.get(context).changeMode();
                             ThemeSwitcher.of(context).changeTheme(
                               theme: MyCubit.get(context).isLightCubit
-                                  ? darkTheme
-                                  : lightTheme,
+                                  ? lightTheme
+                                  : darkTheme,
                             );
-                            MyCubit.get(context).changeMode();
-                            CacheHelper.saveData(
-                                key: isLight,
-                                value: !MyCubit.get(context).isLightCubit);
                           },
                         );
                       },
@@ -77,26 +76,43 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     // ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
-                      label: 'Full Name',
-                      text: "Sohila",
+                      label: 'City',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'Cairo'
+                          : jsonDecode(CacheHelper.getData(key: "user"))["city"]
+                              .toString(),
                       onChanged: (name) {},
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
-                      label: 'Email',
-                      text: "Sohila@gmail.com",
+                      label: 'Address',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'Egypt, Ain shams'
+                          : jsonDecode(
+                                  CacheHelper.getData(key: "user"))["address"]
+                              .toString(),
                       onChanged: (email) {},
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
-                      label: 'About',
-                      text: "Talented donor",
-                      maxLines: 5,
-                      onChanged: (about) {},
+                      label: 'Age',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? '21'
+                          : jsonDecode(CacheHelper.getData(key: "user"))["age"]
+                              .toString(),
+                      onChanged: (email) {},
                     ),
-                    SizedBox(
-                      height: 20,
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      label: 'Password',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? '1234'
+                          : jsonDecode(
+                                  CacheHelper.getData(key: "user"))["password"]
+                              .toString(),
+                      onChanged: (pass) {},
                     ),
+                    const SizedBox(height: 24),
                     MaterialButton(
                       color: Colors.red,
                       height: 50,
@@ -110,49 +126,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    InkWell(
-                      child: Text(
-                        "Delete account?",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      onTap: () {
-                        Alert(
-                          context: context,
-                          type: AlertType.warning,
-                          title: "Delete account",
-                          desc: "Are you sure you want to delete your account?",
-                          buttons: [
-                            DialogButton(
-                              child: Text(
-                                "Yes",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen())),
-                              color: Colors.red,
-                            ),
-                            DialogButton(
-                              child: Text(
-                                "Cancel",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              onPressed: () => Navigator.pop(context),
-                              gradient: LinearGradient(colors: [
-                                Color.fromRGBO(116, 116, 191, 1.0),
-                                Color.fromRGBO(52, 138, 199, 1.0)
-                              ]),
-                            )
-                          ],
-                        ).show();
-                      },
-                    )
                   ],
                 ),
               ),

@@ -55,7 +55,10 @@ dependencies:
   rflutter_alert: ^2.0.4
   flutter_switch: ^0.3.2
   animated_theme_switcher:
-
+  flutter_screenutil: ^5.0.1
+  flutter_feather_icons: ^2.0.0+1
+  gender_picker: ^1.1.0
+  flutter_otp_text_field: ^1.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

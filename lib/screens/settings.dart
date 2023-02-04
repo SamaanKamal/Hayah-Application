@@ -6,6 +6,9 @@ import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
 import 'package:hayah/shared/constants.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'login_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -26,7 +29,10 @@ class SettingScreen extends StatelessWidget {
                 borderRadius: 10,
                 spread: 1,
                 color: Colors.grey.shade400,
-                child: Column(children: [
+                child: Column(
+                  
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   // Container(
                   //   child: Padding(
                   //     padding: const EdgeInsets.all(8.0),
@@ -72,13 +78,56 @@ class SettingScreen extends StatelessWidget {
                             borderRadius: 30.0,
                             padding: 8.0,
                             onToggle: (val) {
-                               MyCubit.get(context).changePush();
+                              MyCubit.get(context).changePush();
                             },
                           ),
                         ],
                       ),
                     ),
                   ),
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Delete account?",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    onTap: () {
+                      Alert(
+                        context: context,
+                        type: AlertType.warning,
+                        title: "Delete account",
+                        desc: "Are you sure you want to delete your account?",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Yes",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen())),
+                            color: Colors.red,
+                          ),
+                          DialogButton(
+                            child: Text(
+                              "Cancel",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            gradient: LinearGradient(colors: [
+                              Color.fromRGBO(116, 116, 191, 1.0),
+                              Color.fromRGBO(52, 138, 199, 1.0)
+                            ]),
+                          )
+                        ],
+                      ).show();
+                    },
+                  )
                 ]),
               ),
             ]),

@@ -28,7 +28,8 @@ class MyCubit extends Cubit<AppStates> {
   }
 
   changeMode() {
-    this.isLightCubit = CacheHelper.getData(key: isLight) ?? true;
+    this.isLightCubit = !this.isLightCubit;
+    CacheHelper.saveData(key: isLight, value: isLightCubit);
     emit(SaveModeState());
   }
 
@@ -58,7 +59,7 @@ class MyCubit extends Cubit<AppStates> {
   ];
   List<IconData> iconList = [
     FontAwesomeIcons.info,
-    FontAwesomeIcons.fileMedical,
+    FontAwesomeIcons.suitcaseMedical,
     FontAwesomeIcons.moneyBill1,
     FontAwesomeIcons.circleQuestion,
   ];
