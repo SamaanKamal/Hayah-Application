@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
+import 'package:hayah/screens/doner/about_us_screen.dart';
 import 'package:hayah/screens/login_screen.dart';
 import 'package:hayah/screens/my_account_screen.dart';
 import 'package:hayah/screens/notification_screen.dart';
@@ -83,22 +84,6 @@ class HomeScreen extends StatelessWidget {
                 indent: 20,
                 thickness: 0.2),
             ListTile(
-              leading: Icon(Icons.notifications),
-              title: Text('Notification'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NotificationScreen()));
-              },
-            ),
-            Divider(
-                height: 1,
-                color: Colors.black,
-                endIndent: 20,
-                indent: 20,
-                thickness: 0.2),
-            ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
               onTap: () {
@@ -124,7 +109,21 @@ class HomeScreen extends StatelessWidget {
                 indent: 20,
                 thickness: 0.2),
             ListTile(
-              title: Text('Exit'),
+              leading: Icon(Icons.info),
+              title: Text('About us'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AboutUsScreen()));
+              },
+            ),
+            Divider(
+                height: 1,
+                color: Colors.black,
+                endIndent: 20,
+                indent: 20,
+                thickness: 0.2),
+            ListTile(
+              title: Text('Log out'),
               leading: Icon(Icons.exit_to_app),
               onTap: () {
                 CacheHelper.saveData(key: isLogged, value: false);

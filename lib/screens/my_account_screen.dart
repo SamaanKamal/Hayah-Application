@@ -76,12 +76,56 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     // ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
+                      label: 'Name',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'Sohila Elsaid'
+                          : jsonDecode(CacheHelper.getData(key: "user"))["name"]
+                              .toString(),
+                      onChanged: (name) {},
+                      isEnapled: false,
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      label: 'Email',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'sohila@gmail.com'
+                          : jsonDecode(
+                                  CacheHelper.getData(key: "user"))["email"]
+                              .toString(),
+                      onChanged: (name) {},
+                      isEnapled: false,
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      label: 'Blood type',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'O+'
+                          : jsonDecode(CacheHelper.getData(key: "user"))[
+                                  "blood_type"]
+                              .toString(),
+                      onChanged: (name) {},
+                      isEnapled: false,
+                    ),
+
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
                       label: 'City',
                       text: CacheHelper.getData(key: "user") == null
                           ? 'Cairo'
                           : jsonDecode(CacheHelper.getData(key: "user"))["city"]
                               .toString(),
                       onChanged: (name) {},
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      label: 'Phone',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? '012121212'
+                          : jsonDecode(
+                                  CacheHelper.getData(key: "user"))["phone"]
+                              .toString(),
+                      onChanged: (name) {},
+                      isEnapled: false,
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
@@ -101,6 +145,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           : jsonDecode(CacheHelper.getData(key: "user"))["age"]
                               .toString(),
                       onChanged: (email) {},
+                      isEnapled: false,
+                    ),
+                    const SizedBox(height: 24),
+                    TextFieldWidget(
+                      label: 'Gender',
+                      text: CacheHelper.getData(key: "user") == null
+                          ? 'Female'
+                          : jsonDecode(CacheHelper.getData(key: "user"))[
+                                          "gender"]
+                                      .toString()
+                                      .toLowerCase() ==
+                                  'true'
+                              ? "Male"
+                              : "Female",
+                      onChanged: (name) {},
+                      isEnapled: false,
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(

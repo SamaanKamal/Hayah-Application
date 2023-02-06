@@ -9,6 +9,7 @@ import 'package:hayah/screens/doner/centers.dart';
 import 'package:hayah/screens/doner/discounts.dart';
 import 'package:hayah/screens/doner/faq_screen.dart';
 import 'package:hayah/screens/doner/home.dart';
+import 'package:hayah/screens/notification_screen.dart';
 import 'package:hayah/shared/components/noti.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -51,14 +52,14 @@ class MyCubit extends Cubit<AppStates> {
     ),
   ];
   List<Widget> screens = [
-    AboutUsScreen(),
+    NotificationScreen(),
     CentersScreen(),
     DiscountsScreen(),
     FAQScreen(),
     HomeSecondScreen()
   ];
   List<IconData> iconList = [
-    FontAwesomeIcons.info,
+    Icons.notifications,
     FontAwesomeIcons.suitcaseMedical,
     FontAwesomeIcons.moneyBill1,
     FontAwesomeIcons.circleQuestion,
@@ -103,4 +104,9 @@ class MyCubit extends Cubit<AppStates> {
     NotificationCard("Welcome to our app!", "12:00 AM"),
     NotificationCard("You are in top 10 donors this week!", "02:00 PM"),
   ];
+  String blood_type = "A positive";
+  changeBlood(val) {
+    blood_type = val;
+    emit(changedBloodState());
+  }
 }

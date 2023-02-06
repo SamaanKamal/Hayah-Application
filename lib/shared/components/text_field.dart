@@ -4,6 +4,7 @@ class TextFieldWidget extends StatefulWidget {
   final int maxLines;
   final String label;
   final String text;
+  final bool isEnapled;
   final ValueChanged<String> onChanged;
 
   const TextFieldWidget({
@@ -12,6 +13,7 @@ class TextFieldWidget extends StatefulWidget {
     required this.label,
     required this.text,
     required this.onChanged,
+    this.isEnapled = true,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           const SizedBox(height: 8),
           TextField(
+            enabled: widget.isEnapled,
             controller: controller,
             decoration: InputDecoration(
               border: OutlineInputBorder(

@@ -15,7 +15,7 @@ class NotificationScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text("Notification")),
+          // appBar: AppBar(title: Text("Notification")),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.separated(

@@ -4,3 +4,4 @@ class SaveModeState extends AppStates{}
 class getFirstModeState extends AppStates{}
 class changeIndexState extends AppStates{}
 class changedIndexCarouselState extends AppStates{}
+class changedBloodState extends AppStates{}
