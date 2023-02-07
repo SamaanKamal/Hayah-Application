@@ -30,105 +30,105 @@ class SettingScreen extends StatelessWidget {
                 spread: 1,
                 color: Colors.grey.shade400,
                 child: Column(
-                  
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  // Container(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(8.0),
-                  //     child: Row(
-                  //       children: [
-                  //         Text("Light mode"),
-                  //         Spacer(),
-                  //         FlutterSwitch(
-                  //           width: 80.0,
-                  //           height: 40.0,
-                  //           valueFontSize: 20.0,
-                  //           toggleSize: 30.0,
-                  //           value: CacheHelper.getData(key: isLight) ??
-                  //               !MyCubit.get(context).isLightCubit,
-                  //           borderRadius: 30.0,
-                  //           padding: 8.0,
-                  //           onToggle: (val) {
-                  //             CacheHelper.saveData(key: isLight, value: val);
-                  //             MyCubit.get(context).changeMode();
-                  //             print(val);
-                  //             print(CacheHelper.saveData(
-                  //                 key: isLight, value: val));
-                  //           },
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Container(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Row(
+                      //       children: [
+                      //         Text("Light mode"),
+                      //         Spacer(),
+                      //         FlutterSwitch(
+                      //           width: 80.0,
+                      //           height: 40.0,
+                      //           valueFontSize: 20.0,
+                      //           toggleSize: 30.0,
+                      //           value: CacheHelper.getData(key: isLight) ??
+                      //               !MyCubit.get(context).isLightCubit,
+                      //           borderRadius: 30.0,
+                      //           padding: 8.0,
+                      //           onToggle: (val) {
+                      //             CacheHelper.saveData(key: isLight, value: val);
+                      //             MyCubit.get(context).changeMode();
+                      //             print(val);
+                      //             print(CacheHelper.saveData(
+                      //                 key: isLight, value: val));
+                      //           },
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
 
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text("Push notification"),
-                          Spacer(),
-                          FlutterSwitch(
-                            width: 70.0,
-                            height: 30.0,
-                            valueFontSize: 20.0,
-                            toggleSize: 15.0,
-                            value: MyCubit.get(context).pushNoti,
-                            borderRadius: 30.0,
-                            padding: 8.0,
-                            onToggle: (val) {
-                              MyCubit.get(context).changePush();
-                            },
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Text("Push notification"),
+                              Spacer(),
+                              FlutterSwitch(
+                                width: 70.0,
+                                height: 30.0,
+                                valueFontSize: 20.0,
+                                toggleSize: 15.0,
+                                value: MyCubit.get(context).pushNoti,
+                                borderRadius: 30.0,
+                                padding: 8.0,
+                                onToggle: (val) {
+                                  MyCubit.get(context).changePush();
+                                },
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Delete account?",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
-                    onTap: () {
-                      Alert(
-                        context: context,
-                        type: AlertType.warning,
-                        title: "Delete account",
-                        desc: "Are you sure you want to delete your account?",
-                        buttons: [
-                          DialogButton(
-                            child: Text(
-                              "Yes",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginScreen())),
-                            color: Colors.red,
+                      InkWell(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Delete account?",
+                            style: TextStyle(color: Colors.red),
                           ),
-                          DialogButton(
-                            child: Text(
-                              "Cancel",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                            gradient: LinearGradient(colors: [
-                              Color.fromRGBO(116, 116, 191, 1.0),
-                              Color.fromRGBO(52, 138, 199, 1.0)
-                            ]),
-                          )
-                        ],
-                      ).show();
-                    },
-                  )
-                ]),
+                        ),
+                        onTap: () {
+                          Alert(
+                            context: context,
+                            type: AlertType.warning,
+                            title: "Delete account",
+                            desc:
+                                "Are you sure you want to delete your account?",
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Yes",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginScreen())),
+                                color: Colors.red,
+                              ),
+                              DialogButton(
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                                gradient: LinearGradient(colors: [
+                                  Color.fromRGBO(116, 116, 191, 1.0),
+                                  Color.fromRGBO(52, 138, 199, 1.0)
+                                ]),
+                              )
+                            ],
+                          ).show();
+                        },
+                      )
+                    ]),
               ),
             ]),
           ),

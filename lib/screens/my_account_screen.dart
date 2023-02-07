@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
+import 'package:hayah/screens/edit_screen.dart';
 import 'package:hayah/screens/login_screen.dart';
 import 'package:hayah/shared/components/appbar.dart';
 import 'package:hayah/shared/components/theme.dart';
@@ -69,121 +70,179 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   physics: BouncingScrollPhysics(),
                   children: [
-                    // ProfileWidget(
-                    //   imagePath: user.imagePath,
-                    //   isEdit: true,
-                    //   onClicked: () async {},
-                    // ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Name',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'Sohila Elsaid'
-                          : jsonDecode(CacheHelper.getData(key: "user"))["name"]
-                              .toString(),
-                      onChanged: (name) {},
-                      isEnapled: false,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          child: ClipOval(
+                            child: CacheHelper.getData(key: "user") == null
+                                ? Image.asset(
+                                    "assets/images/female.png",
+                                    package: 'gender_picker',
+                                  )
+                                : jsonDecode(CacheHelper.getData(key: "user"))[
+                                                "gender"]
+                                            .toString()
+                                            .toLowerCase() ==
+                                        'true'
+                                    ? Image.asset("assets/images/male.png",
+                                        package: 'gender_picker')
+                                    : Image.asset("assets/images/female.png",
+                                        package: 'gender_picker'),
+                          ),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 10),
+                    Text(
+                        CacheHelper.getData(key: "user") == null
+                            ? 'Sohila Elsaid'
+                            : jsonDecode(
+                                    CacheHelper.getData(key: "user"))["name"]
+                                .toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 10),
+                    Text(
+                        CacheHelper.getData(key: "user") == null
+                            ? 'sohila@gmail.com'
+                            : jsonDecode(
+                                    CacheHelper.getData(key: "user"))["email"]
+                                .toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Email',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'sohila@gmail.com'
-                          : jsonDecode(
-                                  CacheHelper.getData(key: "user"))["email"]
-                              .toString(),
-                      onChanged: (name) {},
-                      isEnapled: false,
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.red.shade300,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Blood type : '),
+                            Text(
+                              CacheHelper.getData(key: "user") == null
+                                  ? 'O positive'
+                                  : jsonDecode(CacheHelper.getData(
+                                          key: "user"))["blood_type"]
+                                      .toString(),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Blood type',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'O+'
-                          : jsonDecode(CacheHelper.getData(key: "user"))[
-                                  "blood_type"]
-                              .toString(),
-                      onChanged: (name) {},
-                      isEnapled: false,
-                    ),
-
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'City',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'Cairo'
-                          : jsonDecode(CacheHelper.getData(key: "user"))["city"]
-                              .toString(),
-                      onChanged: (name) {},
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Phone',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? '012121212'
-                          : jsonDecode(
-                                  CacheHelper.getData(key: "user"))["phone"]
-                              .toString(),
-                      onChanged: (name) {},
-                      isEnapled: false,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Address',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'Egypt, Ain shams'
-                          : jsonDecode(
-                                  CacheHelper.getData(key: "user"))["address"]
-                              .toString(),
-                      onChanged: (email) {},
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Age',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? '21'
-                          : jsonDecode(CacheHelper.getData(key: "user"))["age"]
-                              .toString(),
-                      onChanged: (email) {},
-                      isEnapled: false,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Gender',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? 'Female'
-                          : jsonDecode(CacheHelper.getData(key: "user"))[
-                                          "gender"]
-                                      .toString()
-                                      .toLowerCase() ==
-                                  'true'
-                              ? "Male"
-                              : "Female",
-                      onChanged: (name) {},
-                      isEnapled: false,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Password',
-                      text: CacheHelper.getData(key: "user") == null
-                          ? '1234'
-                          : jsonDecode(
-                                  CacheHelper.getData(key: "user"))["password"]
-                              .toString(),
-                      onChanged: (pass) {},
+                    const SizedBox(height: 25),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("City",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              Text(CacheHelper.getData(key: "user") == null
+                                  ? 'Cairo'
+                                  : jsonDecode(CacheHelper.getData(
+                                          key: "user"))["city"]
+                                      .toString())
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Phone",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              Text(CacheHelper.getData(key: "user") == null
+                                  ? '012121212'
+                                  : jsonDecode(CacheHelper.getData(
+                                          key: "user"))["phone"]
+                                      .toString())
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Age",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              Text(CacheHelper.getData(key: "user") == null
+                                  ? '21'
+                                  : jsonDecode(CacheHelper.getData(
+                                          key: "user"))["age"]
+                                      .toString())
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Gender",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              Text(
+                                CacheHelper.getData(key: "user") == null
+                                    ? 'Female'
+                                    : jsonDecode(CacheHelper.getData(
+                                                    key: "user"))["gender"]
+                                                .toString()
+                                                .toLowerCase() ==
+                                            'true'
+                                        ? "Male"
+                                        : "Female",
+                              )
+                            ],
+                          ),
+                        ]),
+                    const SizedBox(height: 25),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.red.shade300,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Address",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 10),
+                            Text(
+                              CacheHelper.getData(key: "user") == null
+                                  ? 'Egypt, Ain shams'
+                                  : jsonDecode(CacheHelper.getData(
+                                          key: "user"))["address"]
+                                      .toString(),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 24),
                     MaterialButton(
                       color: Colors.red,
                       height: 50,
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Updated Successfuly")));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfileScreen()));
                       },
-                      child: Text(
-                        "Update",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(FontAwesomeIcons.edit),
+                          SizedBox(width: 3),
+                          Text(
+                            "Edit",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                        ],
                       ),
                     ),
                   ],

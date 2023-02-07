@@ -55,6 +55,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               ),
             ),
             maxLines: widget.maxLines,
+            
           ),
         ],
       );
