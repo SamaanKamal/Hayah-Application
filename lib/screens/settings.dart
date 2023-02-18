@@ -2,6 +2,7 @@ import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
 import 'package:hayah/shared/constants.dart';
@@ -63,10 +64,10 @@ class SettingScreen extends StatelessWidget {
 
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              Text("Push notification"),
+                              Text("Push notifications"),
                               Spacer(),
                               FlutterSwitch(
                                 width: 70.0,
@@ -84,52 +85,64 @@ class SettingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Delete account?",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                        onTap: () {
-                          Alert(
-                            context: context,
-                            type: AlertType.warning,
-                            title: "Delete account",
-                            desc:
-                                "Are you sure you want to delete your account?",
-                            buttons: [
-                              DialogButton(
-                                child: Text(
-                                  "Yes",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginScreen())),
-                                color: Colors.red,
-                              ),
-                              DialogButton(
-                                child: Text(
-                                  "Cancel",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                                gradient: LinearGradient(colors: [
-                                  Color.fromRGBO(116, 116, 191, 1.0),
-                                  Color.fromRGBO(52, 138, 199, 1.0)
-                                ]),
-                              )
-                            ],
-                          ).show();
-                        },
-                      )
                     ]),
               ),
+              SizedBox(height: 20),
+              ClayContainer(
+                borderRadius: 10,
+                spread: 1,
+                color: Colors.grey.shade400,
+                child: InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Row(
+                      children: [
+                        Icon(FontAwesomeIcons.trashCan,
+                            size: 17, color: Colors.red),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Delete account?",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Alert(
+                      context: context,
+                      type: AlertType.warning,
+                      title: "Delete account",
+                      desc: "Are you sure you want to delete your account?",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen())),
+                          color: Colors.red,
+                        ),
+                        DialogButton(
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          gradient: LinearGradient(colors: [
+                            Color.fromRGBO(116, 116, 191, 1.0),
+                            Color.fromRGBO(52, 138, 199, 1.0)
+                          ]),
+                        )
+                      ],
+                    ).show();
+                  },
+                ),
+              )
             ]),
           ),
         );

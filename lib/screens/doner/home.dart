@@ -9,9 +9,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
 import 'package:hayah/screens/doner/about_us_screen.dart';
+import 'package:hayah/screens/doner/history.dart';
 import 'package:hayah/screens/login_screen.dart';
 import 'package:hayah/screens/my_account_screen.dart';
-import 'package:hayah/screens/notification_screen.dart';
+import 'package:hayah/screens/doner/notification_screen.dart';
 import 'package:hayah/screens/settings.dart';
 import 'package:hayah/shared/constants.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
@@ -100,7 +101,8 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.description),
               title: Text('History'),
-              onTap: () => null,
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HistoryScreen())),
             ),
             Divider(
                 height: 1,
@@ -110,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                 thickness: 0.2),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('About us'),
+              title: Text('Contact us'),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => AboutUsScreen()));

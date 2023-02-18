@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';
@@ -45,8 +46,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool isMale = true;
 
-  final _formKey = GlobalKey<FormState>(); 
- //key for form
+  final _formKey = GlobalKey<FormState>();
+  //key for form
   @override
   Widget build(BuildContext context) {
     bloodType.text = "A positive";
@@ -83,11 +84,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
-                    Text(
-                      "Get Registered From Here",
-                      style: TextStyle(fontSize: 12.sp),
-                    ),
+                    // SizedBox(height: 10.h),
+                    // Text(
+                    //   "Get Registered From Here",
+                    //   style: TextStyle(fontSize: 12.sp),
+                    // ),
                     SizedBox(
                       height: 15.h,
                     ),
@@ -436,22 +437,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           CacheHelper.saveData(key: isLogged, value: true);
-                          CacheHelper.saveDataString(
-                              key: "user",
-                              value: jsonEncode({
-                                "name": "${fName.text} ${lName.text}",
-                                "blood_type":
-                                    "${MyCubit.get(context).blood_type}",
-                                "email": "${email.text}",
-                                "address": "${addres.text}",
-                                "city": "${addres.text}",
-                                "age": "${age.text}",
-                                "phone": "${contactNum.text}",
-                                "password": "${pass.text}",
-                                "gender": "${this.isMale}",
-                              }));
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => HomeScreen()));
+                          showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: false,
+                              backgroundColor: Colors.transparent,
+                              builder: (BuildContext context) {
+                                return Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: Text(
+                                                "Enter code sent to your email"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    OtpTextField(
+                                      numberOfFields: 4,
+                                      borderColor: Colors.red,
+                                      showFieldAsBox: false,
+                                      onCodeChanged: (String code) {},
+                                      onSubmit: (String verificationCode) {
+                                        CacheHelper.saveDataString(
+                                            key: "user",
+                                            value: jsonEncode({
+                                              "name":
+                                                  "${fName.text} ${lName.text}",
+                                              "blood_type":
+                                                  "${MyCubit.get(context).blood_type}",
+                                              "email": "${email.text}",
+                                              "address": "${addres.text}",
+                                              "city": "${addres.text}",
+                                              "age": "${age.text}",
+                                              "phone": "${contactNum.text}",
+                                              "password": "${pass.text}",
+                                              "gender": "${this.isMale}",
+                                            }));
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => HomeScreen()));
+                                      }, // end onSubmit
+                                    ),
+                                  ],
+                                );
+                              });
                         }
                       },
                     ),

@@ -19,6 +19,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _password = CacheHelper.getData(key: "user") == null
       ? '1234'
       : jsonDecode(CacheHelper.getData(key: "user"))["password"].toString();
+  String _phone = CacheHelper.getData(key: "user") == null
+      ? '1234'
+      : jsonDecode(CacheHelper.getData(key: "user"))["phone"].toString();
 
   void _toggle() {
     setState(() {
@@ -50,6 +53,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 : jsonDecode(CacheHelper.getData(key: "user"))["city"]
                     .toString(),
             onChanged: (name) {},
+          ),
+          const SizedBox(height: 24),
+          TextFormField(
+            initialValue: _phone,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              labelStyle: TextStyle(fontSize: 14, color: Colors.grey.shade400),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.grey.shade300,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  )),
+            ),
+            validator: (Phone) {
+              if (Phone!.isEmpty) {
+                return 'Please Enter Phone number';
+              } else
+                return null;
+            },
+            onSaved: (password) => _password = password!,
+            textInputAction: TextInputAction.done,
           ),
           const SizedBox(height: 24),
           Text("Password",

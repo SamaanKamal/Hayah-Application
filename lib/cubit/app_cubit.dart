@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +11,8 @@ import 'package:hayah/screens/doner/centers.dart';
 import 'package:hayah/screens/doner/discounts.dart';
 import 'package:hayah/screens/doner/faq_screen.dart';
 import 'package:hayah/screens/doner/home.dart';
-import 'package:hayah/screens/notification_screen.dart';
+import 'package:hayah/screens/doner/notification_screen.dart';
+import 'package:hayah/shared/components/hist.dart';
 import 'package:hayah/shared/components/noti.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -101,8 +104,28 @@ class MyCubit extends Cubit<AppStates> {
   ];
 
   List<NotificationCard> notis = [
-    NotificationCard("Welcome to our app!", "12:00 AM"),
-    NotificationCard("You are in top 10 donors this week!", "02:00 PM"),
+    NotificationCard(
+        "Dear ${CacheHelper.getData(key: "user") == null ? 'Sohila Elsaid' : jsonDecode(CacheHelper.getData(key: "user"))["name"].toString()}, you got discount to ....",
+        "07:30 PM",
+        "Discount".toUpperCase()),
+    NotificationCard(
+        "Dear ${CacheHelper.getData(key: "user") == null ? 'Sohila Elsaid' : jsonDecode(CacheHelper.getData(key: "user"))["name"].toString()}, you got new report",
+        "02:00 PM",
+        "New Report".toUpperCase()),
+    NotificationCard(
+        "Dear ${CacheHelper.getData(key: "user") == null ? 'Sohila Elsaid' : jsonDecode(CacheHelper.getData(key: "user"))["name"].toString()}, you got discount to ....",
+        "01:30 PM",
+        "Discount".toUpperCase()),
+    NotificationCard(
+        "Dear ${CacheHelper.getData(key: "user") == null ? 'Sohila Elsaid' : jsonDecode(CacheHelper.getData(key: "user"))["name"].toString()}, we need your donation.",
+        "11:00 AM",
+        "Critical situation".toUpperCase()),
+  ];
+  List<HistoryCard> histories = [
+    HistoryCard(
+        "For more details click here", "11:00 AM", "Rejected".toUpperCase()),
+    HistoryCard(
+        "For more details click here", "9:00 AM", "accepted".toUpperCase()),
   ];
   String blood_type = "A positive";
   changeBlood(val) {
@@ -138,6 +161,13 @@ class MyCubit extends Cubit<AppStates> {
     else
       counter++;
     emit(changedCounterState());
+  }
+
+  String errorLogin = "Wrong email or password!";
+  bool isError = false;
+  void errorLoginChecker() {
+    isError = true;
+    emit(errorLoginState());
   }
 }
 

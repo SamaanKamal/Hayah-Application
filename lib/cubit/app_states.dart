@@ -6,3 +6,4 @@ class changeIndexState extends AppStates{}
 class changedIndexCarouselState extends AppStates{}
 class changedBloodState extends AppStates{}
 class changedCounterState extends AppStates{}
+class errorLoginState extends AppStates{}

@@ -2,11 +2,11 @@ import 'package:clay_containers/constants.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 
-class NotificationCard extends StatelessWidget {
+class HistoryCard extends StatelessWidget {
   String body = "";
   String title = "";
   String date = "";
-  NotificationCard(this.body, this.date,this.title);
+  HistoryCard(this.body, this.date, this.title);
   @override
   Widget build(BuildContext context) {
     return ClayContainer(
@@ -30,11 +30,20 @@ class NotificationCard extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(title,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: title.toLowerCase() == "rejected"
+                        ? Colors.red
+                        : Colors.green)),
             SizedBox(
               height: 10,
             ),
-            Text(this.body,style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.027),)
+            Text(
+              this.body,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.027),
+            )
           ],
         ),
         Spacer(),
