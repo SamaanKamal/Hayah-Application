@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/cubit/app_states.dart';
+import 'package:hayah/screens/doctor/home_doctor..dart';
 import 'package:hayah/screens/doner/home.dart';
 import 'package:hayah/screens/signup_screen.dart';
 import 'package:hayah/shared/constants.dart';
+//import 'package:map_location_picker/map_location_picker.dart';
 
 import '../shared/network/local/sharedPrefHelper.dart';
 import 'forgot_password.dart';
@@ -159,10 +161,39 @@ class LoginScreen extends StatelessWidget {
                             CacheHelper.saveData(key: isLogged, value: true);
                             CacheHelper.saveDataString(
                                 key: doctorConstant, value: "doctor_cart");
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => HomeScreen()));
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) {
+                            //       return MapLocationPicker(
+                            //         apiKey:
+                            //             "AIzaSyAgBU810fLDtsyrd1Q9glWGhYyOdPLHnSc",
+                            //         canPopOnNextButtonTaped: true,
+                            //         currentLatLng: LatLng(
+                            //             MyCubit.get(context)
+                            //                     .location!
+                            //                     .latitude ??
+                            //                 0,
+                            //             MyCubit.get(context)
+                            //                     .location!
+                            //                     .longitude ??
+                            //                 0),
+                            //         onNext: (GeocodingResult? result) {
+                            //           if (result != null) {
+                            //             MyCubit.get(context)
+                            //                 .getLocation(result);
+                            //             result.formattedAddress ?? "";
+                            //           }
+                            //         },
+                            //         onSuggestionSelected:
+                            //             (PlacesDetailsResponse? result) {
+                            //           if (result != null) {}
+                            //         },
+                            //       );
+                            //     },
+                            //   ),
+                            // );
+                            MyCubit.get(context).showPlacePicker(context);
                           } else if (email.text == "doctor_lab@doctor.com") {
                             CacheHelper.saveData(key: isLogged, value: true);
                             CacheHelper.saveDataString(
@@ -170,7 +201,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreen()));
+                                    builder: (_) => HomeDoctor()));
                           } else if (email.text == "doctor_hos@doctor.com") {
                             CacheHelper.saveData(key: isLogged, value: true);
                             CacheHelper.saveDataString(
@@ -178,7 +209,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreen()));
+                                    builder: (_) => HomeDoctor()));
                           } else {
                             MyCubit.get(context).errorLoginChecker();
                           }

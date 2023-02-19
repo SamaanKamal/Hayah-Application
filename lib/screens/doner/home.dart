@@ -128,7 +128,10 @@ class HomeScreen extends StatelessWidget {
               title: Text('Log out'),
               leading: Icon(Icons.exit_to_app),
               onTap: () {
+                CacheHelper.sharedPreferences!.clear();
                 CacheHelper.saveData(key: isLogged, value: false);
+                CacheHelper.saveData(key: isFirstTime, value: false);
+
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },

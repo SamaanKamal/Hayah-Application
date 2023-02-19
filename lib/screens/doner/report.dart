@@ -46,7 +46,7 @@ class ReportScreen extends StatelessWidget {
             ),
             isHist
                 ? Text(
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                     "Dear ${CacheHelper.getData(key: "user") == null ? 'Sohila Elsaid' : jsonDecode(CacheHelper.getData(key: "user"))["name"].toString()}, your donation is rejected and your results is here")
                 : SizedBox(),
             SizedBox(
@@ -95,8 +95,8 @@ List<DataRow> dataCells = [
       "Hemoglobin",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("15%")),
-    DataCell(Text(("Adult male: 13% - 18%")))
+    DataCell(Text("15g%")),
+    DataCell(Text(("Adult male: 13g% - 18g%")))
   ]),
   DataRow(cells: [
     DataCell(Text(

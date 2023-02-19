@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:hayah/shared/components/text_field.dart';
 
+import '../shared/constants.dart';
 import '../shared/network/local/sharedPrefHelper.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -37,24 +38,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(children: [
           const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'Address',
-            text: CacheHelper.getData(key: "user") == null
-                ? 'Egypt, Ain shams'
-                : jsonDecode(CacheHelper.getData(key: "user"))["address"]
-                    .toString(),
-            onChanged: (email) {},
-          ),
-          const SizedBox(height: 24),
-          TextFieldWidget(
-            label: 'City',
-            text: CacheHelper.getData(key: "user") == null
-                ? 'Cairo'
-                : jsonDecode(CacheHelper.getData(key: "user"))["city"]
-                    .toString(),
-            onChanged: (name) {},
-          ),
-          const SizedBox(height: 24),
+          CacheHelper.getData(key: doctorConstant) == null
+              ? TextFieldWidget(
+                  label: 'Address',
+                  text: CacheHelper.getData(key: "user") == null
+                      ? 'Egypt, Ain shams'
+                      : jsonDecode(CacheHelper.getData(key: "user"))["address"]
+                          .toString(),
+                  onChanged: (email) {},
+                )
+              : SizedBox(),
+          CacheHelper.getData(key: doctorConstant) == null
+              ? const SizedBox(height: 24)
+              : SizedBox(),
+          CacheHelper.getData(key: doctorConstant) == null
+              ? TextFieldWidget(
+                  label: 'City',
+                  text: CacheHelper.getData(key: "user") == null
+                      ? 'Cairo'
+                      : jsonDecode(CacheHelper.getData(key: "user"))["city"]
+                          .toString(),
+                  onChanged: (name) {},
+                )
+              : SizedBox(),
+          CacheHelper.getData(key: doctorConstant) == null
+              ? const SizedBox(height: 24)
+              : SizedBox(),
+          Text("phone",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
           TextFormField(
             initialValue: _phone,
             keyboardType: TextInputType.text,

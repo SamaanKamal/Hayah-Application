@@ -121,10 +121,16 @@ class SettingScreen extends StatelessWidget {
                             "Yes",
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen())),
+                          onPressed: () {
+                            CacheHelper.sharedPreferences!.clear();
+                            CacheHelper.saveData(key: isLogged, value: false);
+                            CacheHelper.saveData(
+                                key: isFirstTime, value: false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
+                          },
                           color: Colors.red,
                         ),
                         DialogButton(

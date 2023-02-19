@@ -12,7 +12,6 @@ import 'package:hayah/shared/components/appbar.dart';
 import 'package:hayah/shared/components/theme.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 import '../shared/components/text_field.dart';
 import '../shared/constants.dart';
 
@@ -110,27 +109,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     CacheHelper.getData(key: "user"))["email"]
                                 .toString(),
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 24),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.red.shade300,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Text('Blood type : '),
-                            Text(
-                              CacheHelper.getData(key: "user") == null
-                                  ? 'O positive'
-                                  : jsonDecode(CacheHelper.getData(
-                                          key: "user"))["blood_type"]
-                                      .toString(),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    CacheHelper.getData(key: doctorConstant) == null
+                        ? const SizedBox(height: 24)
+                        : SizedBox(),
+                    CacheHelper.getData(key: doctorConstant) == null
+                        ? Container(
+                            decoration: BoxDecoration(
+                                color: Colors.red.shade300,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Text('Blood type : '),
+                                  Text(
+                                    CacheHelper.getData(key: "user") == null
+                                        ? 'O positive'
+                                        : jsonDecode(CacheHelper.getData(
+                                                key: "user"))["blood_type"]
+                                            .toString(),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
                     const SizedBox(height: 25),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

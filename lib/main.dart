@@ -3,7 +3,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hayah/screens/doctor/home_doctor..dart';
 import 'package:hayah/screens/doner/home.dart';
 import 'package:hayah/shared/blocObserevr.dart';
 import 'package:hayah/shared/components/theme.dart';
@@ -19,6 +21,7 @@ import 'package:flutter/scheduler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Geolocator.requestPermission();
   await CacheHelper.init();
   BlocOverrides.runZoned(
     () {
@@ -106,7 +109,9 @@ class MyApp extends StatelessWidget {
                             );
                           })
                         : (CacheHelper.getData(key: isLogged) ?? false)
-                            ? HomeScreen()
+                            ? CacheHelper.getData(key: doctorConstant) == null
+                                ? HomeScreen()
+                                : HomeDoctor()
                             : LoginScreen());
               }),
             ),

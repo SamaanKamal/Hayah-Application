@@ -52,54 +52,54 @@ class HomeSecondScreen extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.red.shade400),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text("كيف التبرع بالدم يساعد المرضي ؟",
-                  style: TextStyle(fontFamily: "Quicksand", fontSize: 25)),
+              Text("How donating blood helps patients?",
+                  style: TextStyle(fontFamily: "Quicksand", fontSize: 22)),
               SizedBox(
                 height: 5,
               ),
-              Text("لديك القدرة على إنقاذ الأرواح")
+              Text("You have the power to save lives")
             ]),
           ),
           const SizedBox(height: 20),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("من تستطيع المساعدة عبر التبرع بالدم؟",
+                child: Text("Who can help by donating blood?",
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                    "كل يوم، يحتاج المرضى من جميع الأعمار إلى عمليات نقل دم. من الرُضّع إلى الكبار. ضحايا الحروق والحوادث، مرضى الثلاسيميا، مرضى الخلايا المنجلية، مرضى جراحة القلب، مرضى زرع الأعضاء، ومرضى السرطان. في الواقع، يحتاج بعض مرضى الثلاسيميا والسرطان إلى دم يومياً"),
+                    "Every day, patients of all ages need blood transfusions. From infants to adults. Burn and accident victims, thalassemia patients, sickle cell patients, heart surgery patients, organ transplant patients, and cancer patients. In fact, some patients with thalassemia and cancer need blood daily"),
               )
             ],
           ),
           Divider(height: 20, endIndent: 20, indent: 20, color: Colors.red),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("كم مرة يمكنك التبرع بالدم؟",
+                child: Text("How many times can you donate blood?",
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                      "الدم الكامل : يمكن التبرع به بعد كل 56 يوما أو 08 أسبوعا. الصفائح الدموية : يمكن التبرع بالصفائح الدموية كل 7 أيام وحتى 24 مرة في السنة. البلازما : كل 28 يوما وحتى 13 مرة في السنة. الخلايا الحمراء المزدوجة : يمكن التبرع بها كل 112 يوما أو ما يصل إلى 3 مرات كل عام."))
+                      "Whole blood: can be donated after every 56 days or 08 weeks. Platelets: Platelets can be donated every 7 days and up to 24 times a year. Plasma: every 28 days and up to 13 times a year. Double red cells: can be donated every 112 days or up to 3 times each year."))
             ],
           ),
           Divider(height: 20, endIndent: 20, indent: 20, color: Colors.red),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "نسال هذه الأسئلة حفاظا على حياتكم قبل إجراء أى شئ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  "We ask these questions for your safety before doing anything",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                 ),
               ),
             ],
