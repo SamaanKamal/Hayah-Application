@@ -55,12 +55,13 @@ class ReportScreen extends StatelessWidget {
             SizedBox(height: 10),
             Expanded(
               child: DataTable2(
-                  lmRatio: 1,
+                  lmRatio: 1.2,
                   horizontalMargin: 12,
                   dataRowHeight: 100,
                   columnSpacing: 0,
                   border: TableBorder(
                       horizontalInside: BorderSide(strokeAlign: 1),
+                      verticalInside: BorderSide(strokeAlign: 1),
                       bottom: BorderSide(strokeAlign: 1),
                       right: BorderSide(strokeAlign: 1),
                       left: BorderSide(strokeAlign: 1),
@@ -69,14 +70,14 @@ class ReportScreen extends StatelessWidget {
                   dividerThickness: 5,
                   columns: [
                     DataColumn2(
-                      label: Text('Item'),
-                      size: ColumnSize.L,
-                    ),
+                        label: Text('Item'),
+                        size: ColumnSize.L,
+                        fixedWidth: MediaQuery.of(context).size.width * 0.3),
+                    DataColumn2(
+                        label: Text(' Result'),
+                        fixedWidth: MediaQuery.of(context).size.width * 0.2),
                     DataColumn(
-                      label: Text('Result'),
-                    ),
-                    DataColumn(
-                      label: Text('Range'),
+                      label: Text(' Range'),
                     ),
                   ],
                   rows: dataCells),
@@ -95,7 +96,12 @@ List<DataRow> dataCells = [
       "Hemoglobin",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("15g%")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("15g%"),
+      ],
+    )),
     DataCell(Text(("Adult male: 13g% - 18g%")))
   ]),
   DataRow(cells: [
@@ -103,7 +109,12 @@ List<DataRow> dataCells = [
       "Red blood cell count",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("5")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("5"),
+      ],
+    )),
     DataCell(Text(("4.2 - 5.9 million/cmm")))
   ]),
   DataRow(cells: [
@@ -111,7 +122,12 @@ List<DataRow> dataCells = [
       "MCH",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("30")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("30"),
+      ],
+    )),
     DataCell(Text(("27pg - 33pg")))
   ]),
   DataRow(cells: [
@@ -119,7 +135,12 @@ List<DataRow> dataCells = [
       "MCV",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("90")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("90"),
+      ],
+    )),
     DataCell(Text(("80fl - 100fl")))
   ]),
   DataRow(cells: [
@@ -127,7 +148,12 @@ List<DataRow> dataCells = [
       "MCHC",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("35")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("35"),
+      ],
+    )),
     DataCell(Text(("31 - 37g/dl")))
   ]),
   DataRow(cells: [
@@ -135,7 +161,12 @@ List<DataRow> dataCells = [
       "Platelet count",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("100")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("100"),
+      ],
+    )),
     DataCell(Text(("150 - 450 Thousand/cmm")))
   ]),
   DataRow(cells: [
@@ -143,7 +174,12 @@ List<DataRow> dataCells = [
       "HBA1c",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("6")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("6"),
+      ],
+    )),
     DataCell(Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +195,12 @@ List<DataRow> dataCells = [
       "SGOT-AST",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("26")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("26"),
+      ],
+    )),
     DataCell(Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -174,7 +215,12 @@ List<DataRow> dataCells = [
       "SGPT-ALT",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("35")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("35"),
+      ],
+    )),
     DataCell(Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -189,7 +235,12 @@ List<DataRow> dataCells = [
       "Blood urea",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("25")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("25"),
+      ],
+    )),
     DataCell(Text("15 - 45 u/l"))
   ]),
   DataRow(cells: [
@@ -197,7 +248,12 @@ List<DataRow> dataCells = [
       "Serum creatinine",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("1")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("1"),
+      ],
+    )),
     DataCell(Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +269,12 @@ List<DataRow> dataCells = [
       "Serum uric acid",
       style: TextStyle(fontWeight: FontWeight.bold),
     )),
-    DataCell(Text("1")),
+    DataCell(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("1"),
+      ],
+    )),
     DataCell(Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
