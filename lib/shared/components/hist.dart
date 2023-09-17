@@ -6,7 +6,9 @@ class HistoryCard extends StatelessWidget {
   String body = "";
   String title = "";
   String date = "";
+
   HistoryCard(this.body, this.date, this.title);
+
   @override
   Widget build(BuildContext context) {
     return ClayContainer(
@@ -46,14 +48,14 @@ class HistoryCard extends StatelessWidget {
             )
           ],
         ),
-        Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [Text(this.date)],
-          ),
-        )
+        // Spacer(),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.start,
+        //     children: [Text(this.date)],
+        //   ),
+        // )
       ]),
     );
   }

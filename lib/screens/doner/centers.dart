@@ -60,28 +60,33 @@ class _CentersScreenState extends State<CentersScreen> {
           listener: (context, state) {},
           builder: (context, state) {
             return Scaffold(
-              body: (state is initiaGetLocationState || myIcon == null)
+              body: (state is initiaGetLocationState ||
+                      MyCubit.get(context).markersNew.isEmpty ||
+                      MyCubit.get(context).polylines.isEmpty)
                   ? Center(
                       child: CircularProgressIndicator(),
                     )
                   : GoogleMap(
+                      polylines: MyCubit.get(context).polylines,
                       onMapCreated: _onMapCreated,
                       initialCameraPosition: CameraPosition(
                         target:
                             MyCubit.get(context).currentLatLng ?? LatLng(0, 0),
                         zoom: 15.0,
                       ),
-                      markers: {
-                          Marker(
-                            markerId: MarkerId("hello"),
-                            infoWindow: InfoWindow(
-                              title: "Your location",
-                            ),
-                            position: MyCubit.get(context).currentLatLng ??
-                                LatLng(0, 0),
-                            icon: myIcon ?? BitmapDescriptor.defaultMarker,
-                          )
-                        }),
+                      markers: MyCubit.get(context).markersNew
+                      // {
+                      //     Marker(
+                      //       markerId: MarkerId("hello"),
+                      //       infoWindow: InfoWindow(
+                      //         title: "Your location",
+                      //       ),
+                      //       position: MyCubit.get(context).currentLatLng ??
+                      //           LatLng(0, 0),
+                      //       icon: myIcon ?? BitmapDescriptor.defaultMarker,
+                      //     )
+                      //   }
+                      ),
             );
           },
         ));

@@ -8,22 +8,19 @@ import 'package:hayah/cubit/app_states.dart';
 import 'package:hayah/shared/constants.dart';
 import 'package:hayah/shared/network/local/sharedPrefHelper.dart';
 
-class DiscountDetailsScreen extends StatefulWidget {
-  DiscountDetailsScreen({super.key});
+import '../../model/discount_image_data_model.dart';
 
+class NotificationDetailsScreen extends StatefulWidget {
+  NotificationDetailsScreen({super.key, required this.notificationDetailsData});
+
+  DiscountImageDataModel? notificationDetailsData;
 
   @override
-  State<DiscountDetailsScreen> createState() => _DiscountDetailsScreenState();
+  State<NotificationDetailsScreen> createState() =>
+      _NotificationDetailsScreenState();
 }
 
-class _DiscountDetailsScreenState extends State<DiscountDetailsScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    MyCubit.get(context).getDiscountsImageData();
-  }
-
+class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyCubit, AppStates>(
@@ -64,7 +61,7 @@ class _DiscountDetailsScreenState extends State<DiscountDetailsScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                        "- You have discount ${MyCubit.get(context).discountImageDataModel!.percentage}% off on x-ray and examination, This offer only for ${MyCubit.get(context).discountImageDataModel!.LabName} lab"),
+                                        "- You have discount ${widget.notificationDetailsData!.percentage}% off on x-ray and examination, This offer only for ${widget.notificationDetailsData!.LabName} lab"),
                                     SizedBox(
                                       height: 15,
                                     ),

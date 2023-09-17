@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:hayah/cubit/app_cubit.dart';
 import 'package:hayah/shared/components/text_field.dart';
 
 import '../shared/constants.dart';
@@ -17,12 +18,16 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
-  String _password = CacheHelper.getData(key: "user") == null
-      ? '1234'
-      : jsonDecode(CacheHelper.getData(key: "user"))["password"].toString();
-  String _phone = CacheHelper.getData(key: "user") == null
-      ? '1234'
-      : jsonDecode(CacheHelper.getData(key: "user"))["phone"].toString();
+
+  // String _password = "";
+  // String _address = jsonDecode(CacheHelper.getData(key: donorData))["address"];
+  // String _phone = jsonDecode(CacheHelper.getData(key: donorData))["phone"];
+  final TextEditingController controllerAddress = TextEditingController(
+      text: jsonDecode(CacheHelper.getData(key: donorData))["address"]);
+  final TextEditingController controllerphone = TextEditingController(
+      text: jsonDecode(CacheHelper.getData(key: donorData))["phone"]);
+  final TextEditingController controllerpassword =
+      TextEditingController(text: "");
 
   void _toggle() {
     setState(() {
@@ -38,38 +43,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(children: [
           const SizedBox(height: 24),
-          CacheHelper.getData(key: doctorConstant) == null
-              ? TextFieldWidget(
-                  label: 'Address',
-                  text: CacheHelper.getData(key: "user") == null
-                      ? 'Egypt, Ain shams'
-                      : jsonDecode(CacheHelper.getData(key: "user"))["address"]
-                          .toString(),
-                  onChanged: (email) {},
-                )
-              : SizedBox(),
-          CacheHelper.getData(key: doctorConstant) == null
-              ? const SizedBox(height: 24)
-              : SizedBox(),
-          CacheHelper.getData(key: doctorConstant) == null
-              ? TextFieldWidget(
-                  label: 'City',
-                  text: CacheHelper.getData(key: "user") == null
-                      ? 'Cairo'
-                      : jsonDecode(CacheHelper.getData(key: "user"))["city"]
-                          .toString(),
-                  onChanged: (name) {},
-                )
-              : SizedBox(),
-          CacheHelper.getData(key: doctorConstant) == null
-              ? const SizedBox(height: 24)
-              : SizedBox(),
-          Text("phone",
+          Text("Address",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               )),
           TextFormField(
-            initialValue: _phone,
+            controller: controllerAddress,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelStyle: TextStyle(fontSize: 14, color: Colors.grey.shade400),
@@ -85,13 +64,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     color: Colors.red,
                   )),
             ),
-            validator: (Phone) {
-              if (Phone!.isEmpty) {
-                return 'Please Enter Phone number';
-              } else
-                return null;
-            },
-            onSaved: (password) => _password = password!,
+            // validator: (Phone) {
+            //   if (Phone!.isEmpty) {
+            //     return 'Please Enter Phone number';
+            //   } else
+            //     return null;
+            // },
+            textInputAction: TextInputAction.done,
+          ),
+          Text("phone",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
+          TextFormField(
+            controller: controllerphone,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              labelStyle: TextStyle(fontSize: 14, color: Colors.grey.shade400),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.grey.shade300,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  )),
+            ),
+            // validator: (Phone) {
+            //   if (Phone!.isEmpty) {
+            //     return 'Please Enter Phone number';
+            //   } else
+            //     return null;
+            // },
             textInputAction: TextInputAction.done,
           ),
           const SizedBox(height: 24),
@@ -100,7 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 fontWeight: FontWeight.bold,
               )),
           TextFormField(
-            initialValue: _password,
+            controller: controllerpassword,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelStyle: TextStyle(fontSize: 14, color: Colors.grey.shade400),
@@ -122,13 +129,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onPressed: _toggle,
               ),
             ),
-            validator: (password) {
-              if (password!.isEmpty) {
-                return 'Please Enter Password';
-              } else
-                return null;
-            },
-            onSaved: (password) => _password = password!,
+            //validator: (password) {
+            //   if (password!.isEmpty) {
+            //     return 'Please Enter Password';
+            //   } else
+            //     return null;
+            // },
             textInputAction: TextInputAction.done,
             obscureText: _obscureText,
           ),
@@ -137,40 +143,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             color: Colors.red,
             height: 50,
             onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: false,
-                  backgroundColor: Colors.transparent,
-                  builder: (BuildContext context) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Text("Enter code sent to your email"),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        OtpTextField(
-                          numberOfFields: 4,
-                          borderColor: Colors.red,
-                          showFieldAsBox: false,
-                          onCodeChanged: (String code) {},
-                          onSubmit: (String verificationCode) {
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Updated Successfuly")));
-                          }, // end onSubmit
-                        ),
-                      ],
-                    );
-                  });
+              MyCubit.get(context).sendOtp(controllerAddress.text,
+                  controllerphone.text, controllerpassword.text, context);
             },
             child: Text(
               "Update",

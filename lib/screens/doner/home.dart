@@ -20,6 +20,7 @@ import 'package:gender_picker/gender_picker.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyCubit, AppStates>(
@@ -37,32 +38,35 @@ class HomeScreen extends StatelessWidget {
           child: ListView(padding: EdgeInsets.zero, children: [
             UserAccountsDrawerHeader(
               accountName: Text(
-                CacheHelper.getData(key: "user") == null
-                    ? 'Sohila Elsaid'
-                    : jsonDecode(CacheHelper.getData(key: "user"))["name"]
-                        .toString(),
+                CacheHelper.getData(key: isDonner)
+                    ? jsonDecode(CacheHelper.getData(key: donorData))["fname"]??"" +
+                        " " +
+                        jsonDecode(CacheHelper.getData(key: donorData))["lname"]??""
+                    : jsonDecode(
+                            CacheHelper.getData(key: doctorData))["fname"] +
+                        " " +
+                        jsonDecode(
+                            CacheHelper.getData(key: doctorData))["lname"],
                 style: TextStyle(color: Colors.black),
               ),
               accountEmail: Text(
-                  CacheHelper.getData(key: "user") == null
-                      ? 'Sohila@gmail.com'
-                      : jsonDecode(CacheHelper.getData(key: "user"))["email"]
-                          .toString(),
+                  CacheHelper.getData(key: isDonner)
+                      ? jsonDecode(CacheHelper.getData(key: donorData))["email"]
+                      : jsonDecode(
+                          CacheHelper.getData(key: doctorData))["email"],
                   style: TextStyle(color: Colors.black)),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: CacheHelper.getData(key: "user") == null
-                      ? Image.asset("assets/images/female.png",
-                          package: 'gender_picker')
-                      : jsonDecode(CacheHelper.getData(key: "user"))["gender"]
-                                  .toString()
-                                  .toLowerCase() ==
-                              'true'
-                          ? Image.asset("assets/images/male.png",
-                              package: 'gender_picker')
-                          : Image.asset("assets/images/female.png",
-                              package: 'gender_picker'),
-                ),
+                    child: CacheHelper.getData(key: isDonner)
+                        ? jsonDecode(CacheHelper.getData(key: donorData))[
+                                    "gender"] ==
+                                'M'
+                            ? Image.asset("assets/images/male.png",
+                                package: 'gender_picker')
+                            : Image.asset("assets/images/female.png",
+                                package: 'gender_picker')
+                        : Image.asset("assets/images/male.png",
+                            package: 'gender_picker')),
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -114,8 +118,27 @@ class HomeScreen extends StatelessWidget {
               leading: Icon(Icons.info),
               title: Text('Contact us'),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AboutUsScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ContactUs(
+                              companyName: 'Hayah',
+                              cardColor: Colors.red,
+                              textColor: Colors.white,
+                              email: 'hayahadmin@gmail.com',
+                              phoneNumber: "01270969538",
+                              image: Image.asset("assets/images/logo.png",
+                                  width: 300, height: 300),
+                              githubUserName: "nermeen_elbably",
+                              // linkedinURL: "",
+                              // facebookHandle: "",
+                              // instagram: "",
+                              emailText: "Email",
+                              companyColor: Colors.red,
+                              taglineColor: Colors.black,
+                              dividerColor: Colors.black,
+                              dividerThickness: 2,
+                            )));
               },
             ),
             Divider(

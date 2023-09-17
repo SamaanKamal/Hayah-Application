@@ -12,11 +12,20 @@ import 'package:hayah/shared/constants.dart';
 import '../shared/network/local/sharedPrefHelper.dart';
 import 'forgot_password.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>(); //key for form
-  TextEditingController email = new TextEditingController();
-  TextEditingController pass = new TextEditingController();
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+ //key for form
+  TextEditingController email = TextEditingController();
+
+  TextEditingController pass = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,9 +121,25 @@ class LoginScreen extends StatelessWidget {
                             contentPadding: EdgeInsets.all(10)),
                       ),
                     ),
-                    SizedBox(
-                      height: 5.h,
+                    Column(
+                      children: [
+                        RadioListTile<String>(
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text('Doctor'),
+                          value: 'Doctor',
+                          groupValue: MyCubit.get(context).selectedVal,
+                          onChanged: MyCubit.get(context).radioVal,
+                        ),
+                        RadioListTile<String>(
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text('Donor'),
+                          value: 'Donor',
+                          groupValue: MyCubit.get(context).selectedVal,
+                          onChanged: MyCubit.get(context).radioVal,
+                        ),
+                      ],
                     ),
+
                     MyCubit.get(context).isError
                         ? Text(
                             MyCubit.get(context).errorLogin,
@@ -144,77 +169,20 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                           side: BorderSide(
                               color: Theme.of(context).primaryColor)),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (email.text == "donner@donner.com") {
-                            CacheHelper.saveData(key: isLogged, value: true);
-                            CacheHelper.saveData(key: isDonner, value: true);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => HomeScreen()));
-                          } else if (email.text == "doctor_cart@doctor.com") {
-                            CacheHelper.saveData(key: isLogged, value: true);
-                            CacheHelper.saveDataString(
-                                key: doctorConstant, value: "doctor_cart");
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) {
-                            //       return MapLocationPicker(
-                            //         apiKey:
-                            //             "AIzaSyAgBU810fLDtsyrd1Q9glWGhYyOdPLHnSc",
-                            //         canPopOnNextButtonTaped: true,
-                            //         currentLatLng: LatLng(
-                            //             MyCubit.get(context)
-                            //                     .location!
-                            //                     .latitude ??
-                            //                 0,
-                            //             MyCubit.get(context)
-                            //                     .location!
-                            //                     .longitude ??
-                            //                 0),
-                            //         onNext: (GeocodingResult? result) {
-                            //           if (result != null) {
-                            //             MyCubit.get(context)
-                            //                 .getLocation(result);
-                            //             result.formattedAddress ?? "";
-                            //           }
-                            //         },
-                            //         onSuggestionSelected:
-                            //             (PlacesDetailsResponse? result) {
-                            //           if (result != null) {}
-                            //         },
-                            //       );
-                            //     },
-                            //   ),
-                            // );
-                            MyCubit.get(context).showPlacePicker(context);
-                          } else if (email.text == "doctor_lab@doctor.com") {
-                            CacheHelper.saveData(key: isLogged, value: true);
-                            CacheHelper.saveDataString(
-                                key: doctorConstant, value: "doctor_lab");
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => HomeDoctor()));
-                          } else if (email.text == "doctor_hos@doctor.com") {
-                            CacheHelper.saveData(key: isLogged, value: true);
-                            CacheHelper.saveDataString(
-                                key: doctorConstant, value: "doctor_hos");
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => HomeDoctor()));
-                          } else {
-                            MyCubit.get(context).errorLoginChecker();
-                          }
-                        }
-                      },
+                      child: state is loginLoadingState
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.sp),
+                            ),
+                      onPressed: () => MyCubit.get(context).login(
+                          MyCubit.get(context).selectedVal,
+                          email.text,
+                          pass.text,
+                          context),
                     ),
                     SizedBox(
                       height: 8.h,

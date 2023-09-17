@@ -75,39 +75,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         CircleAvatar(
                           radius: 50,
                           child: ClipOval(
-                            child: CacheHelper.getData(key: "user") == null
-                                ? Image.asset(
-                                    "assets/images/female.png",
-                                    package: 'gender_picker',
-                                  )
-                                : jsonDecode(CacheHelper.getData(key: "user"))[
-                                                "gender"]
-                                            .toString()
-                                            .toLowerCase() ==
-                                        'true'
-                                    ? Image.asset("assets/images/male.png",
-                                        package: 'gender_picker')
-                                    : Image.asset("assets/images/female.png",
-                                        package: 'gender_picker'),
-                          ),
+                              child: CacheHelper.getData(key: isDonner)
+                                  ? jsonDecode(CacheHelper.getData(
+                                              key: donorData))["gender"] ==
+                                          'M'
+                                      ? Image.asset("assets/images/male.png",
+                                          package: 'gender_picker')
+                                      : Image.asset("assets/images/female.png",
+                                          package: 'gender_picker')
+                                  : Image.asset("assets/images/male.png",
+                                      package: 'gender_picker')),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Text(
-                        CacheHelper.getData(key: "user") == null
-                            ? 'Sohila Elsaid'
-                            : jsonDecode(
-                                    CacheHelper.getData(key: "user"))["name"]
-                                .toString(),
+                        CacheHelper.getData(key: isDonner)
+                            ? jsonDecode(CacheHelper.getData(key: donorData))[
+                                    "fname"] +
+                                " " +
+                                jsonDecode(CacheHelper.getData(key: donorData))[
+                                    "lname"]
+                            : jsonDecode(CacheHelper.getData(key: doctorData))[
+                                    "fname"] +
+                                " " +
+                                jsonDecode(CacheHelper.getData(
+                                    key: doctorData))["lname"],
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 10),
                     Text(
-                        CacheHelper.getData(key: "user") == null
-                            ? 'sohila@gmail.com'
+                        CacheHelper.getData(key: isDonner)
+                            ? jsonDecode(
+                                CacheHelper.getData(key: donorData))["email"]
                             : jsonDecode(
-                                    CacheHelper.getData(key: "user"))["email"]
-                                .toString(),
+                                CacheHelper.getData(key: doctorData))["email"],
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     CacheHelper.getData(key: doctorConstant) == null
                         ? const SizedBox(height: 24)
@@ -123,11 +124,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 children: [
                                   Text('Blood type : '),
                                   Text(
-                                    CacheHelper.getData(key: "user") == null
-                                        ? 'O positive'
-                                        : jsonDecode(CacheHelper.getData(
-                                                key: "user"))["blood_type"]
-                                            .toString(),
+                                    jsonDecode(CacheHelper.getData(
+                                        key: donorData))["blood_type"],
                                   )
                                 ],
                               ),
@@ -138,20 +136,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("City",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              const SizedBox(height: 10),
-                              Text(CacheHelper.getData(key: "user") == null
-                                  ? 'Cairo'
-                                  : jsonDecode(CacheHelper.getData(
-                                          key: "user"))["city"]
-                                      .toString())
-                            ],
-                          ),
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Text("City",
+                          //         style:
+                          //             TextStyle(fontWeight: FontWeight.bold)),
+                          //     const SizedBox(height: 10),
+                          //     Text(CacheHelper.getData(key: "user") == null
+                          //         ? 'Cairo'
+                          //         : jsonDecode(CacheHelper.getData(
+                          //                 key: "user"))["city"]
+                          //             .toString())
+                          //   ],
+                          // ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -159,44 +157,52 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                               const SizedBox(height: 10),
-                              Text(CacheHelper.getData(key: "user") == null
-                                  ? '012121212'
+                              Text(CacheHelper.getData(key: isDonner)
+                                  ? jsonDecode(CacheHelper.getData(
+                                      key: donorData))["phone"]
                                   : jsonDecode(CacheHelper.getData(
-                                          key: "user"))["phone"]
-                                      .toString())
+                                      key: doctorData))["phone"])
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Age",
+                              Text(
+                                  CacheHelper.getData(key: isDonner)
+                                      ? "Age"
+                                      : "CenterId",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                               const SizedBox(height: 10),
-                              Text(CacheHelper.getData(key: "user") == null
-                                  ? '21'
+                              Text(CacheHelper.getData(key: isDonner)
+                                  ? jsonDecode(CacheHelper.getData(
+                                              key: donorData))["age"]
+                                          .toString() ??
+                                      ""
                                   : jsonDecode(CacheHelper.getData(
-                                          key: "user"))["age"]
-                                      .toString())
+                                              key: doctorData))["center_id"]
+                                          .toString() ??
+                                      "")
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Gender",
+                              Text(
+                                  CacheHelper.getData(key: isDonner)
+                                      ? "Gender"
+                                      : "Doctor code",
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                               const SizedBox(height: 10),
                               Text(
-                                CacheHelper.getData(key: "user") == null
-                                    ? 'Female'
+                                CacheHelper.getData(key: isDonner)
+                                    ? jsonDecode(CacheHelper.getData(
+                                            key: donorData))["gender"] ??
+                                        ""
                                     : jsonDecode(CacheHelper.getData(
-                                                    key: "user"))["gender"]
-                                                .toString()
-                                                .toLowerCase() ==
-                                            'true'
-                                        ? "Male"
-                                        : "Female",
+                                            key: doctorData))["id"]
+                                        .toString(),
                               )
                             ],
                           ),
@@ -215,10 +221,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             const SizedBox(height: 10),
                             Text(
-                              CacheHelper.getData(key: "user") == null
-                                  ? 'Egypt, Ain shams'
+                              CacheHelper.getData(key: isDonner)
+                                  ? jsonDecode(CacheHelper.getData(
+                                          key: donorData))["address"] ??
+                                      ""
                                   : jsonDecode(CacheHelper.getData(
-                                          key: "user"))["address"]
+                                          key: doctorData))["address"]
                                       .toString(),
                             )
                           ],
@@ -226,28 +234,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    MaterialButton(
-                      color: Colors.red,
-                      height: 50,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfileScreen()));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(FontAwesomeIcons.edit),
-                          SizedBox(width: 3),
-                          Text(
-                            "Edit",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
+                    if (CacheHelper.getData(key: isDonner))
+                      MaterialButton(
+                        color: Colors.red,
+                        height: 50,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditProfileScreen()));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(FontAwesomeIcons.edit),
+                            SizedBox(width: 3),
+                            Text(
+                              "Edit",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),

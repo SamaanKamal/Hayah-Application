@@ -37,14 +37,14 @@ class NotificationCard extends StatelessWidget {
             Text(this.body,style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.027),)
           ],
         ),
-        Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [Text(this.date)],
-          ),
-        )
+        // Spacer(),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.start,
+        //     children: [Text(this.date)],
+        //   ),
+        // )
       ]),
     );
   }

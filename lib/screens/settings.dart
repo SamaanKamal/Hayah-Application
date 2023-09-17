@@ -122,14 +122,7 @@ class SettingScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                           onPressed: () {
-                            CacheHelper.sharedPreferences!.clear();
-                            CacheHelper.saveData(key: isLogged, value: false);
-                            CacheHelper.saveData(
-                                key: isFirstTime, value: false);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                            MyCubit.get(context).deleteAccount(context);
                           },
                           color: Colors.red,
                         ),
